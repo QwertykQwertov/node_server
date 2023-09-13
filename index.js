@@ -7,6 +7,8 @@ const coursesRoutes = require('./routes/courses')
 const cardRoutes = require('./routes/card')
 const addRoutes = require('./routes/add')
 
+const testRoutes = require('./routes/test')
+
 const server = express()
 const hbs = exphbs.create({
   defaultLayout: 'main',
@@ -25,6 +27,8 @@ server.use('/courses', coursesRoutes)
 server.use('/card', cardRoutes)
 server.use('/add', addRoutes)
 
+server.use('/test', testRoutes)
+
 const PORT = process.env.PORT || 3000
 
 server.listen(PORT, () => {
@@ -33,10 +37,8 @@ server.listen(PORT, () => {
 
 async function start() {
   try {
-    const password = 'aE71FOMIdI8d8z0V'
-    const url = `mongodb+srv://qwertykqwertov:${password}@cluster0.a2wawyn.mongodb.net/?retryWrites=true&w=majority`
-    const localDb = 'mongodb://localhost:27017'
-    await mongoose.connect(localDb, { useNewUrlParser: true })
+    const url = 'mongodb://localhost:27017/shop'
+    await mongoose.connect(url, { useNewUrlParser: true })
   }
   catch (e) {
     console.log(e)

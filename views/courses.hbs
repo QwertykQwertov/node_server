@@ -1,5 +1,5 @@
 <h1>Список курсов</h1>
-
+{{log 'ЛОГ' courses}}
 {{#if courses.length}}
 {{#each courses}}
 <div class="row">
@@ -16,7 +16,7 @@
         <a href="/courses/{{id}}" target="_blank">Открыть курс</a>
         <a href="/courses/{{id}}/edit?allow=true" target="_blank">Редактировать</a>
         <form action="/card/add" method="POST">
-          <input type="hidden" name="id" value="{{id}}">
+          <input type="hidden" name="id" value="{{_id}}">
           <button type="submit" class="btn btn-primary">Купить</button>
         </form>
       </div>
