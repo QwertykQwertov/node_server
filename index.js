@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
-const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
 const cardRoutes = require('./routes/card')
@@ -9,35 +9,36 @@ const addRoutes = require('./routes/add')
 
 const testRoutes = require('./routes/test')
 
-const server = express()
+const app = express()
 const hbs = exphbs.create({
   defaultLayout: 'main',
-  extname: 'hbs'
+  extname: 'hbs'  
 })
 
-server.engine('hbs', hbs.engine)
-server.set('view engine', 'hbs')
-server.set('views', 'views')
+app.engine('hbs', hbs.engine)
+app.set('view engine', 'hbs')
+app.set('views', 'views')
 
-server.use(express.static(path.join(__dirname, 'public')))
-server.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({ extended: true }))
 
-server.use('/', homeRoutes)
-server.use('/courses', coursesRoutes)
-server.use('/card', cardRoutes)
-server.use('/add', addRoutes)
+app.use('/', homeRoutes)
+app.use('/courses', coursesRoutes)
+app.use('/card', cardRoutes)
+app.use('/add', addRoutes)
 
-server.use('/test', testRoutes)
+app.use('/test', testRoutes)
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+app.listen(PORT, () => {
+  console.log(`app is running on port ${PORT}`)
 })
 
 async function start() {
   try {
-    const url = 'mongodb://localhost:27017/shop'
+    const url = `mongodb+srv://qwertykqwertov:ghjcnjnfr3@cluster0.a2wawyn.mongodb.net/shop?retryWrites=true&w=majority`
+    // const url = `mongodb+srv://vladilen:0I5GEL9uLUcR38GC@cluster0-3rrau.mongodb.net/shop`
     await mongoose.connect(url, { useNewUrlParser: true })
   }
   catch (e) {
@@ -46,4 +47,3 @@ async function start() {
 }
 
 start()
-// mongodb+srv://qwertykqwertov:aE71FOMIdI8d8z0V@cluster0.a2wawyn.mongodb.net/?retryWrites=true&w=majority

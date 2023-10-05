@@ -1,5 +1,5 @@
-<h1>Список курсов</h1>
-{{log 'ЛОГ' courses}}
+<h1>Курсы</h1>
+
 {{#if courses.length}}
 {{#each courses}}
 <div class="row">
@@ -9,14 +9,14 @@
         <img src="{{url}}" alt="{{title}}">
       </div>
       <div class="card-content">
-        <span>{{title}}</span>
+        <span class="card-title">{{title}}</span>
         <p class="price">{{price}}</p>
       </div>
       <div class="card-action actions">
         <a href="/courses/{{id}}" target="_blank">Открыть курс</a>
-        <a href="/courses/{{id}}/edit?allow=true" target="_blank">Редактировать</a>
+        <a href="/courses/{{id}}/edit?allow=true">Редактировать</a>
         <form action="/card/add" method="POST">
-          <input type="hidden" name="id" value="{{_id}}">
+          <input type="hidden" name="id" value="{{id}}">
           <button type="submit" class="btn btn-primary">Купить</button>
         </form>
       </div>
@@ -25,5 +25,5 @@
 </div>
 {{/each}}
 {{else}}
-
+<p>Курсов пока нет</p>
 {{/if}}
